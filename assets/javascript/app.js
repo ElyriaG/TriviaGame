@@ -35,11 +35,11 @@ var questions = [{
     answer: "Mai and Ty Lee"
 }];
 
-var questionCounter = 0; //Tracks question number
-var selections = []; //Array containing user choices
-var quiz = $("#quiz"); //Quiz div object
+var questionCounter = 0;
+var quiz = $("#quiz"); 
+var timer = 30;
 
-displayNext();
+// displayNext();
 
 
 // Question Div, Not displaying though
@@ -60,6 +60,7 @@ function createQuestionElement(index) {
 }
 
 
+
 //   Create the answer choice buttons aka radios
 function createRadios(index) {
     var radioList = $("<ul>");
@@ -76,14 +77,60 @@ function createRadios(index) {
 };
 
 
-// Trying to get new question when clicked
-// function check() {
-//     if (document.getElementById("answer").checked = answer){
-//         createQuestionElement(questionCounter++);
-//     }
-//     else {
-//         console.log("meh")
-//     }
-// }
+
+
+// Timer countdown
+var intervalId;
+var isRunning = false;
+function run() {
+    if (timer > 0 && !isRunning) {
+        isRunning = true;
+        intervalId = setInterval(decrement, 1000);
+    }
+}
+
+function decrement() {
+    timer--;
+    $("#countdownNumber").html("<h2>" + timer + "</h2>");
+
+    if (timer === 0) {
+
+        stop();
+        alert("Time Up!");
+        clearInterval;
+    }
+}
+
+function stop() {
+    clearInterval(intervalId);
+}
+
+run();
+
+
+
+
+displayNext();
+
+
+// var nextQuestion = createQuestionElement(questionCounter++);
+// quiz.append(nextQuestion);
+// quiz.append(nextQuestion);
+
+
+// Displays next requested element, Trying to get new question when clicked
+function displayNext() {
+    var userSelection = document.getElementById("answer").checked; //Why is checked null???
+    if (userSelection = true) {
+        questionCounter++;
+    }
+    else {
+        console.log("meh")
+    }};
+
+    
+
+
+
 
 
