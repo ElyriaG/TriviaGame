@@ -39,8 +39,10 @@ var questionCounter = 0; //Tracks question number
 var selections = []; //Array containing user choices
 var quiz = $("#quiz"); //Quiz div object
 
+displayNext();
 
 
+// Question Div, Not displaying though
 function createQuestionElement(index) {
     var questionDiv = $("<div>", { id: "question" });
 
@@ -54,7 +56,9 @@ function createQuestionElement(index) {
     questionDiv.append(radioButtons);
 
     return questionDiv;
+
 }
+
 
 //   Create the answer choice buttons aka radios
 function createRadios(index) {
@@ -63,20 +67,23 @@ function createRadios(index) {
     var answerChoices = "";
     for (var i = 0; i < questions[index].choices.length; i++) {
         lineItem = $("<li style='list-style-type:none'>");
-        answerChoices = "<input type='radio' name='answer' value=" + i + " />";
+        answerChoices = "<input type='radio' name='answer' id='answer' value=" + i + " />";
         answerChoices += questions[index].choices[i];
         lineItem.append(answerChoices);
         radioList.append(lineItem);
     }
     return radioList;
-}
-
-
-
-if (questionCounter < questions.length) {
-    var nextQuestion = createQuestionElement(questionCounter);
-    quiz.append(nextQuestion);
-    if (!(isNaN(selections[questionCounter]))) {
-        $('input[value=' + selections[questionCounter] + ']').prop('checked', true);
-    }
 };
+
+
+// Trying to get new question when clicked
+// function check() {
+//     if (document.getElementById("answer").checked = answer){
+//         createQuestionElement(questionCounter++);
+//     }
+//     else {
+//         console.log("meh")
+//     }
+// }
+
+
