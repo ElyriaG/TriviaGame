@@ -36,46 +36,47 @@ var questions = [{
 }];
 
 var questionCounter = 0; //Tracks question number
-  var selections = []; //Array containing user choices
-  var quiz = $("#quiz"); //Quiz div object
-  
- 
+var selections = []; //Array containing user choices
+var quiz = $("#quiz"); //Quiz div object
+
+
 
 function createQuestionElement(index) {
-    var questionDiv = $('<div>', {id: 'question'});
+    var questionDiv = $("<div>", { id: "question" });
 
-    var questionHeader = $('<h1 style="color: white">Question ' + (index + 1) + ':</h1>');
+    var questionHeader = $("<h1 style='color: white'>Question " + (index + 1) + ":</h1>");
     questionDiv.append(questionHeader);
-    
-    var question = $('<h3 style="color: white; background-color:#0066ff">').append(questions[index].question);
+
+    var question = $("<h3 style='color: white; background-color:#0066ff'>").append(questions[index].question);
     questionDiv.append(question);
-    
+
     var radioButtons = createRadios(index);
     questionDiv.append(radioButtons);
-    
+
     return questionDiv;
-  }
-  function createRadios(index) {
-    var radioList = $('<ul>');
-    var item;
-    var input = '';
+}
+
+//   Create the answer choice buttons aka radios
+function createRadios(index) {
+    var radioList = $("<ul>");
+    var lineItem;
+    var answerChoices = "";
     for (var i = 0; i < questions[index].choices.length; i++) {
-      item = $('<li>');
-      input = '<input type="radio" name="answer" value=' + i + ' />';
-      input += questions[index].choices[i];
-      item.append(input);
-      radioList.append(item);
+        lineItem = $("<li style='list-style-type:none'>");
+        answerChoices = "<input type='radio' name='answer' value=" + i + " />";
+        answerChoices += questions[index].choices[i];
+        lineItem.append(answerChoices);
+        radioList.append(lineItem);
     }
     return radioList;
-  }
+}
 
-  
-      
-      if(questionCounter < questions.length){
-        var nextQuestion = createQuestionElement(questionCounter);
-        quiz.append(nextQuestion);
-        if (!(isNaN(selections[questionCounter]))) {
-          $('input[value='+selections[questionCounter]+']').prop('checked', true);
-        }
-        
-    };
+
+
+if (questionCounter < questions.length) {
+    var nextQuestion = createQuestionElement(questionCounter);
+    quiz.append(nextQuestion);
+    if (!(isNaN(selections[questionCounter]))) {
+        $('input[value=' + selections[questionCounter] + ']').prop('checked', true);
+    }
+};
